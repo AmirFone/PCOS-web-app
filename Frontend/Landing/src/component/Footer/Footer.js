@@ -62,38 +62,33 @@ class Footer extends Component {
           style={{ backgroundImage: "url(" + footer_image + ")" }}
         >
           <Container>
-            <Row>
-              <Col lg={4}>
-                <div className="mb-5">
-                  <Link to="#">
-                    <img src={logolight} alt="" className="" height="28" />
-                  </Link>
-                  <p className="text-white-50 my-4">Cras ultricies mi eu turpis sit hendrerit fringilla vestibulum ante ipsum primis in faucibus ultrices posuere cubilia.</p>
-                  <Link to="#" className="text-white-70"><FeatherIcon className="icon mr-1" icon="instagram" />{" "} Join Us In Instagram</Link>
-                </div>
-              </Col>
-              <Col lg={7} className="offset-lg-1">
-                <Row>
-                  {/* Render Footer Link */}
-                  {this.state.links.map((item, key) => (
-                    <Col md={4} key={key}>  
-                    <h4 className="text-white f-22 fw-normal mb-3">
-                          {item.title}
-                        </h4>
-                        <ul className="list-unstyled footer-sub-menu">
-                          {item.child.map((linkItem, key) => (
-                            <li key={key}>
-                              <Link className="footer-link" to={linkItem.link}>
-                                {linkItem.title}
-                              </Link>
-                            </li>
-                          ))}
-                        </ul>
-                    </Col>
-                  ))}
-                </Row>
-              </Col>
-            </Row>
+          <Row>
+            <Col md={4}>
+              <h4 className="text-white f-22 fw-normal mb-3">PCOS Resources</h4>
+              <ul className="list-unstyled footer-sub-menu">
+                <li><Link className="footer-link" to="/blog">PCOS Blog</Link></li>
+                <li><Link className="footer-link" to="/community">PCOS Community</Link></li>
+                <li><Link className="footer-link" to="/faq">PCOS FAQ</Link></li>
+              </ul>
+            </Col>
+            <Col md={4}>
+              <h4 className="text-white f-22 fw-normal mb-3">Company</h4>
+              <ul className="list-unstyled footer-sub-menu">
+                <li><Link className="footer-link" to="/about">About Us</Link></li>
+                <li><Link className="footer-link" to="/contact">Contact Us</Link></li>
+                <li><Link className="footer-link" to="/privacy">Privacy Policy</Link></li>
+                <li><Link className="footer-link" to="/terms">Terms of Service</Link></li>
+              </ul>
+            </Col>
+            <Col md={4}>
+              <h4 className="text-white f-22 fw-normal mb-3">Support</h4>
+              <ul className="list-unstyled footer-sub-menu">
+                <li><Link className="footer-link" to="/support">Help Center</Link></li>
+                <li><Link className="footer-link" to="/contact">Report a Bug</Link></li>
+                <li><Link className="footer-link" to="/contact">Submit Feedback</Link></li>
+              </ul>
+            </Col>
+          </Row>
             {/* Render Footer Link End */}
             <FooterLink />
           </Container>

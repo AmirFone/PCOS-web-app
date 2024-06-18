@@ -18,8 +18,8 @@ export default class About extends Component {
             <Row className="justify-content-center">
               <Col lg={7}>
                 <div className="text-center mb-5">
-                  <h2 className="">About Us</h2>
-                  <p className="text-muted">Ut enim ad minima veniam quis nostrum exercitationem ullam corporis suscipit laboriosam nisi commodi consequatur.</p>
+                <h2 className="">About Our PCOS Solution</h2>
+                <p className="text-muted">Our mission is to empower women with Polycystic Ovary Syndrome (PCOS) by providing a comprehensive mobile app that helps them manage their symptoms, access personalized recommendations, and connect with PCOS specialists in their area. We understand the challenges faced by women with PCOS and aim to simplify their journey towards better health and well-being.</p>
                 </div>
               </Col>
             </Row>

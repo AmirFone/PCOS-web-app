@@ -30,8 +30,8 @@ export default class Services extends Component {
                       <img src={Icon1} alt="" className="img-fluid d-block" />
                     </div>
                   </div>
-                  <h4 className="service-title mt-4 mb-3 f-18">Awesome Support</h4>
-                  <p className="service-subtitle mb-4 f-15">Omnicos directe al desirabilite de une nov lingua franca a refusa continuar payar custosi traductores.</p>
+                  <h4 className="service-title mt-4 mb-3 f-18">Symptom Tracking</h4>
+                  <p className="service-subtitle mb-4 f-15">Easily log and monitor your PCOS-related symptoms, including menstrual changes, to better understand your condition and identify patterns.</p>
                   <Link to="#" className="read-more">More<span className="right-icon ml-2">&#8594;</span></Link>
                 </div>
               </Col>
@@ -42,8 +42,8 @@ export default class Services extends Component {
                       <img src={Icon2} alt="" className="img-fluid d-block" />
                     </div>
                   </div>
-                  <h4 className="service-title mt-4 mb-3 f-18">Analytics Security</h4>
-                  <p className="service-subtitle mb-4 f-15">Omnicos directe al desirabilite de une nov lingua franca a refusa continuar payar custosi traductores.</p>
+                  <h4 className="service-title mt-4 mb-3 f-18">Personalized Recommendations</h4>  
+                  <p className="service-subtitle mb-4 f-15">Receive tailored lifestyle suggestions, such as workouts, diet plans, and stress-management techniques like yoga, based on your unique symptoms and goals.</p>
                   <Link to="#" className="read-more">More<span className="right-icon ml-2">&#8594;</span></Link>
                 </div>
               </Col>
@@ -54,8 +54,8 @@ export default class Services extends Component {
                       <img src={Icon3} alt="" className="img-fluid d-block" />
                     </div>
                   </div>
-                  <h4 className="service-title mt-4 mb-3 f-18">Data Privacy</h4>
-                  <p className="service-subtitle mb-4 f-15">Omnicos directe al desirabilite de une nov lingua franca a refusa continuar payar custosi traductores.</p>
+                  <h4 className="service-title mt-4 mb-3 f-18">Wearable Integration</h4>  
+                  <p className="service-subtitle mb-4 f-15">Sync the app with your Apple Watch or other wearable devices for seamless tracking and data integration.</p>
                   <Link to="#" className="read-more">More<span className="right-icon ml-2">&#8594;</span></Link>
                 </div>
               </Col>

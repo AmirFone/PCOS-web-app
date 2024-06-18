@@ -23,6 +23,13 @@ class NavbarPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      navItems: [
+        { id: 1, idnm: "home", navheading: "Home" },
+        { id: 2, idnm: "features", navheading: "Features" },
+        { id: 3, idnm: "success", navheading: "Success Stories" },
+        { id: 4, idnm: "resources", navheading: "PCOS Resources" },
+        { id: 5, idnm: "contact", navheading: "Contact Us" },
+      ],
       isOpenMenu: false,
     };
   }

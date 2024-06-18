@@ -18,68 +18,73 @@ import { Link } from "react-router-dom";
 
 export default class News extends Component {
     render() {
-        return (
-            <React.Fragment>
-
-                <section className="section bg-light">
-                    <Container>
-                        <Row className=" justify-content-center">
-                            <Col lg={7}>
-                                <div className="text-center mb-5">
-                                    <h2>Latest News</h2>
-                                    <p className="text-muted">Ut enim ad minima veniam quis nostrum exercitationem ullam corporis suscipit laboriosam nisi commodi consequatur.</p>
-                                </div>
-                            </Col>
-                        </Row>
-
-                        <Row>
-                            <Col lg={6}>
-                                <div className="blog-box mb-4 mb-lg-0">
-                                    <img src={Img1} alt="" className="img-fluid d-block mx-auto rounded shadow" />
-                                </div>
-                            </Col>
-
-                            <Col lg={6}>
-                                <div className="blog-box">
-                                    <div className="d-flex blog-box-content align-items-center">
-                                        <img src={Img2} alt="" className="img-fluid d-block rounded shadow blog-img me-3 flex-shrink-0" />
-                                        <div className="flex-grow-1">
-                                            <h5 className="f-17 mb-1"><Link to="#" className="text-dark">The Big Event Conference</Link></h5>
-                                            <p className="text-muted f-15">At vero eos et accusamus et iusto dignissimos.</p>
-                                            <ul className="list-inline text-muted f-14 mb-0">
-                                                <li className="list-inline-item"> <FeatherIcon className="icon-size-15 mr-1 icon" icon="calendar" />{" "}07 Jan 2020</li>{" "}
-                                                <li className="list-inline-item"> <FeatherIcon className="icon-size-15 mr-1 icon" icon="clock" />{" "}15 min ago</li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div className="d-flex blog-box-content align-items-center">
-                                        <img src={Img3} alt="" className="img-fluid d-block rounded shadow blog-img me-3 flex-shrink-0" />
-                                        <div className="flex-grow-1">
-                                            <h5 className="f-17 mb-1"><Link to="#" className="text-dark">Best Family House For You</Link></h5>
-                                            <p className="text-muted f-15">At vero eos et accusamus et iusto dignissimos.</p>
-                                            <ul className="list-inline text-muted f-14 mb-0">
-                                                <li className="list-inline-item"> <FeatherIcon className="icon-size-15 mr-1 icon" icon="calendar" />{" "}07 Jan 2020</li>{" "}
-                                                <li className="list-inline-item"> <FeatherIcon className="icon-size-15 mr-1 icon" icon="clock" />{" "}20 min ago</li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div className="d-flex blog-box-content align-items-center">
-                                        <img src={Img4} alt="" className="img-fluid d-block rounded shadow blog-img me-3 flex-shrink-0" />
-                                        <div className="flex-grow-1">
-                                            <h5 className="f-17 mb-1"><Link to="#" className="text-dark">Business Metting Places</Link></h5>
-                                            <p className="text-muted f-15">At vero eos et accusamus et iusto dignissimos.</p>
-                                            <ul className="list-inline text-muted f-14 mb-0">
-                                                <li className="list-inline-item"> <FeatherIcon className="icon-size-15 mr-1 icon" icon="calendar" />{" "}07 Jan 2020</li>{" "}
-                                                <li className="list-inline-item"> <FeatherIcon className="icon-size-15 mr-1 icon" icon="clock" />{" "}30 min ago</li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                            </Col>
-                        </Row>
-                    </Container>
-                </section>
-            </React.Fragment>
-        );
+      return (
+        <React.Fragment>
+          <section className="section bg-light">
+            <Container>
+              <Row className="justify-content-center">
+                <Col lg={7}>
+                  <div className="text-center mb-5">
+                    <h2>PCOS Resources</h2>
+                    <p className="text-muted">
+                      Stay informed and empowered with our curated collection of PCOS articles, blog posts, and research findings.
+                    </p>
+                  </div>
+                </Col>
+              </Row>
+  
+              <Row>
+                <Col lg={4}>
+                  <div className="blog-box mb-4">
+                    <img src={Img1} alt="" className="img-fluid d-block mx-auto rounded shadow" />
+                    <div className="mt-3">
+                      <h5 className="f-17 mb-1">
+                        <Link to="/article1" className="text-dark">
+                          Understanding PCOS: Symptoms, Causes, and Diagnosis
+                        </Link>
+                      </h5>
+                      <p className="text-muted">
+                        Learn the basics of PCOS, including common symptoms, potential causes, and the diagnostic process.
+                      </p>
+                    </div>
+                  </div>
+                </Col>
+  
+                <Col lg={4}>
+                  <div className="blog-box mb-4">
+                    <img src={Img2} alt="" className="img-fluid d-block mx-auto rounded shadow" />
+                    <div className="mt-3">
+                      <h5 className="f-17 mb-1">
+                        <Link to="/article2" className="text-dark">
+                          Lifestyle Changes for Managing PCOS
+                        </Link>
+                      </h5>
+                      <p className="text-muted">
+                        Discover effective lifestyle modifications that can help manage PCOS symptoms and improve overall health.
+                      </p>
+                    </div>
+                  </div>
+                </Col>
+  
+                <Col lg={4}>
+                  <div className="blog-box mb-4">
+                    <img src={Img3} alt="" className="img-fluid d-block mx-auto rounded shadow" />
+                    <div className="mt-3">
+                      <h5 className="f-17 mb-1">
+                        <Link to="/article3" className="text-dark">
+                          The Role of Nutrition in PCOS Management
+                        </Link>
+                      </h5>
+                      <p className="text-muted">
+                        Explore the importance of a balanced diet for women with PCOS and learn about nutrient-rich food choices.
+                      </p>
+                    </div>
+                  </div>
+                </Col>
+              </Row>
+            </Container>
+          </section>
+        </React.Fragment>
+      );
     }
-}
+  }
