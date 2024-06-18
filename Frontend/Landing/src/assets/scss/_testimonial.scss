@@ -1,0 +1,82 @@
+//
+// testimonial.scss
+//
+
+// .slick-track .slick-slide>div{
+//     margin-right: 20px;
+// }
+// .slick-list {
+//     margin-right: -20px;
+// }
+// .slick-dots li {
+//     margin: 0px;
+// }
+// .slick-dots li.slick-active button:before,.slick-dots li button:hover::before{
+//     background: #3956DE;
+//     -webkit-box-shadow: 0 0 0 1px #3956DE;
+//     box-shadow: 0 0 0 1px #3956DE;
+// }
+
+// #clients{
+//     padding-bottom: 128px;
+// }
+
+// .slick-dots{
+//     li{
+//         button{
+//             &:before{
+//                 font-size:unset;
+//                 opacity: unset;
+//                 width: 12px;
+//                 height: 12px;
+//                 border: 3px solid #fff;
+//                 margin: 5px 4px;
+//                 background: rgba(57,86,222,0.4);
+//                 border-radius: 100%;
+//                 margin-top: 16px;
+//             }
+//         }
+//     }
+// }
+.testi-content {
+    .testi-box {
+        .test-user-info {
+            .testi-user-img {
+                border: 5px solid $white;
+                transition: all 0.5s;
+            }
+        }
+    }
+    .owl-nav {
+        display: none;
+    }
+    .owl-dots {
+        margin-top: 16px;
+        .owl-dot {
+            outline: none;
+            span {
+                width: 12px;
+                height: 12px;
+                border: 3px solid $white;
+                margin: 5px 4px;
+                background: rgba($primary, 0.4);
+            }
+            &.active, &:hover {
+                span {
+                    background: $primary;
+                    box-shadow: 0 0 0 1px $primary;
+                }
+            }
+        }
+    }
+    .owl-item {
+        &.center, &:hover {
+            .testi-box {
+                .testi-user-img {
+                    box-shadow: 0 3px 0 -1px rgba($primary, 0.6);
+                    transform: translateY(-4px);
+                }
+            }
+        }
+    }
+}
