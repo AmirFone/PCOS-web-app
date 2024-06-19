@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-
-//import icon
-import FeatherIcon from "feather-icons-react";
+import { FaRobot } from "react-icons/fa";
 import { Col, Container, Form, FormGroup, Input, Label, Row, Button } from "reactstrap";
 
 // Import Background Image
@@ -19,7 +17,7 @@ export default class Contact extends Component {
                 <div className="text-center mb-5">
                   <h2 className="">Contact Us</h2>
                   <p className="text-muted">
-                    Have questions about our PCOS app or need support? Reach out to us using the form below, and our team will get back to you as soon as possible.
+                    Have questions about our PCOS app or need support? Reach out to us using the form below, or interact with our AI-powered PCOS assistant for personalized guidance.
                   </p>
                 </div>
               </Col>
@@ -29,14 +27,14 @@ export default class Contact extends Component {
                 <div className="mb-5 mb-lg-0">
                   <div className="text-center">
                     <img src={ContactImg} alt="" className="img-fluid d-block w-75 mx-auto" />
-                    <h4 className="mt-4">Have Questions About Our PCOS App?</h4>
+                    <h4 className="mt-4">Introducing Our AI-Powered PCOS Assistant</h4>
                     <p className="text-muted mb-4">
-                      Our dedicated support team is here to help you with any questions or concerns you may have about our PCOS app. We're committed to providing you with the resources and support you need to effectively manage your PCOS symptoms.
+                      Chat with our AI assistant, powered by GPT, to get personalized advice and support tailored to your unique PCOS journey. Our AI assistant is contextually aware of your symptoms, goals, and progress, providing you with relevant information and guidance every step of the way.
                     </p>
                     <Link to="#" className="btn btn-primary">
-                      <FeatherIcon className="icon mr-2 icon-fill-white" icon="message-circle" /> Start Live Chat
+                      <FaRobot className="mr-2" /> Chat with AI Assistant
                     </Link>
-                    <p className="mt-4">Or reach out to us directly:</p>
+                    <p className="mt-4">Or reach out to our support team:</p>
                     <Row>
                       <Col md={6}>
                         <Link to="#">

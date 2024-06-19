@@ -14,17 +14,17 @@
     .menu-social-icon {
         li {
             margin: 0 8px;
-
+      
             .menu-social-link {
                 color: $muted;
                 transition: all 0.5s;
 
                 &:hover {
-                    color: $primary;
+                    color: #EBC8BB;
                 }
             }
         }
-
+  
     }
 }
 
@@ -70,7 +70,7 @@
         li.active a,
         li a:hover,
         li a:active {
-            color: $primary !important;
+            color: #EBC8BB !important;
         }
 
         &.menu-social-icon {
@@ -103,7 +103,7 @@
 .nav .open>a:focus,
 .nav .open>a:hover {
     background-color: transparent;
-    border-color: $primary;
+    border-color: #EBC8BB;
 }
 
 .menu-toggle {
@@ -124,14 +124,14 @@
                 color: rgba($white, 0.6) !important;
             }
         }
-
+      
         li.active a,
         li a:hover,
         li a:active {
             color: $white !important;
         }
     }
-
+  
     .menu-social-icon {
         li {
             margin: 0 8px;
@@ -156,18 +156,18 @@
             display: inline-block !important;
         }
     }
-
+  
     &.nav-sticky {
         .menu-social-icon {
             li {
                 margin: 0 8px;
-
+      
                 .menu-social-link {
                     color: $muted !important;
                     transition: all 0.5s;
 
                     &:hover {
-                        color: $primary !important;
+                        color: #EBC8BB !important;
                     }
                 }
             }
@@ -193,7 +193,7 @@
 
         .navbar-nav {
             margin-top: 0px;
-
+          
             li {
                 a {
                     color: darken($muted, 6%) !important;
@@ -203,7 +203,7 @@
             li.active a,
             li a:hover,
             li a:active {
-                color: $primary !important;
+                color: #EBC8BB !important;
             }
         }
     }
@@ -237,7 +237,7 @@
 
         .navbar-nav {
             margin-top: 10px;
-
+          
             li {
                 a {
                     transition: all 0.4s;
@@ -255,7 +255,7 @@
             li.active a,
             li a:hover,
             li a:active {
-                color: $primary !important;
+                color: #EBC8BB !important;
             }
         }
 
@@ -275,7 +275,7 @@
 
         &.navbar-light {
             .navbar-nav {
-
+              
                 li.active a,
                 li a:hover,
                 li a:active {
@@ -283,20 +283,20 @@
                 }
             }
         }
-
+      
     }
 
     .navbar {
         .menu-social-icon {
             li {
                 margin: 0 8px;
-
+      
                 .menu-social-link {
                     color: $muted !important;
                     transition: all 0.5s;
 
                     &:hover {
-                        color: $primary !important;
+                        color: #EBC8BB !important;
                     }
                 }
             }
@@ -317,7 +317,7 @@
         margin-bottom: 0px;
         color: $dark;
     }
-
+  
     .navbar-light {
         .nav-item {
             .nav-link:after {

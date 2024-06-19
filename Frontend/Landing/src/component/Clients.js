@@ -1,9 +1,8 @@
 import React, { Component } from "react";
 import { Col, Container, Row } from "reactstrap";
-
 import Slider from "react-slick";
 
-// Import client   Image
+// Import client Image
 import Icon from "../assets/images/testi-icon.png";
 import Img1 from "../assets/images/user/img-1.jpg";
 import Img2 from "../assets/images/user/img-2.jpg";
@@ -18,30 +17,31 @@ export default class Clients extends Component {
         {
           id: 1,
           img: Img1,
-          name: 'Joshua Vargas',
-          designation: 'Web Developer, USA'
+          name: 'Sarah Johnson',
+          quote: 'The PCOS app has been a lifesaver for me. It has helped me track my symptoms, learn more about my condition, and connect with a supportive community.'
         },
         {
           id: 2,
           img: Img2,
-          name: 'Sammie Lewis',
-          designation: 'UI/UX Designer, USA'
+          name: 'Emily Davis',
+          quote: 'I love how easy it is to use this app to log my symptoms and get personalized recommendations. It has empowered me to take control of my PCOS journey.'
         },
         {
           id: 3,
           img: Img3,
-          name: 'Sarah Levine',
-          designation: 'PHP Developer, USA'
+          name: 'Jessica Thompson',
+          quote: 'As someone newly diagnosed with PCOS, this app has been an invaluable resource. It has provided me with the information and support I need to manage my symptoms.'
         },
         {
           id: 4,
           img: Img4,
-          name: 'Bobby Kelly',
-          designation: 'Graphic Designer, USA'
+          name: 'Hannah Wilson',
+          quote: 'I appreciate the holistic approach this app takes to PCOS management. It has helped me make positive lifestyle changes and feel more in control of my health.'
         },
       ],
     };
   }
+
   render() {
     var settings = {
       dots: true,
@@ -49,31 +49,31 @@ export default class Clients extends Component {
       infinite: true,
       slidesToShow: 3,
       slidesToScroll: 1,
-      arrows:false,
-      centerPadding : '20px',
+      arrows: false,
+      centerPadding: '20px',
       responsive: [
         {
           breakpoint: 1000,
           settings: {
             slidesToShow: 3,
             infinite: true,
-            centerPadding : '20px'
+            centerPadding: '20px'
           }
         },
         {
           breakpoint: 600,
           settings: {
-            slidesToShow: 2,  
+            slidesToShow: 2,
             infinite: true,
-            centerPadding : '20px'
+            centerPadding: '20px'
           }
         },
         {
           breakpoint: 0,
           settings: {
-            slidesToShow: 1,  
+            slidesToShow: 1,
             infinite: true,
-            centerPadding : '20px'
+            centerPadding: '20px'
           }
         }
       ]
@@ -87,14 +87,13 @@ export default class Clients extends Component {
               <div className="mt-1 mb-3">
                 <img src={Icon} alt="" className="testi-icon img-fluid d-block mx-auto w-auto" />
               </div>
-              <p className="text-muted mb-0 f-15">Et harum quidem rerum facilis expedita distinctio nam libero tempore soluta nobis optio cumque.</p>
+              <p className="text-muted mb-0 f-15">{item.quote}</p>
             </div>
             <div className="test-user-info">
               <div className="avatar-md mx-auto">
                 <img src={item.img} alt="" className="img-fluid d-block rounded-circle testi-user-img" />
               </div>
               <h5 className="f-17 mt-3 mb-1">{item.name}</h5>
-              <p className="text-muted f-14">{item.designation}</p>
             </div>
           </div>
         </div>
@@ -108,20 +107,17 @@ export default class Clients extends Component {
             <Row className="justify-content-center">
               <Col lg={7}>
                 <div className="text-center mb-5">
-                  <h2 className="">What Our Customers Say</h2>
-                  <p className="text-muted">Ut enim ad minima veniam quis nostrum exercitationem ullam corporis suscipit laboriosam nisi commodi consequatur.</p>
+                  <h2 className="">What Our Users research has found </h2>
+                  <p className="text-muted">Hear from people who have found support and empowerment in managing their PCOS with our app.</p>
                 </div>
               </Col>
             </Row>
             <Row>
               <Col lg={12}>
-              <div
-                  id="testi-clients"
-                  className="owl-carousel owl-theme testi-content"
-                >
-                <Slider {...settings}>
-                  {slides}
-                </Slider>
+                <div id="testi-clients" className="owl-carousel owl-theme testi-content">
+                  <Slider {...settings}>
+                    {slides}
+                  </Slider>
                 </div>
               </Col>
             </Row>
