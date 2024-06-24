@@ -14,7 +14,7 @@ class Section extends Component {
           <Container>
             <Row className="align-items-center justify-content-center">
               <Col lg={6}>
-                <h1 className="display-4 fw-medium mb-4">Hello,</h1>
+                {/* <h1 className="display-4 fw-medium mb-4">Hello,</h1> */}
                 <h1 className="hero-1-title fw-normal text-dark mb-4">Empowering Women with PCOS</h1>
                 <p className="text-muted mb-4 pb-3">Our innovative mobile app helps you take control of your PCOS journey by providing personalized symptom tracking, lifestyle recommendations, and access to specialist care.</p>
                 <Link to="#" className="btn btn-primary">Get Started <span className="ml-2 right-icon">&#8594;</span></Link>

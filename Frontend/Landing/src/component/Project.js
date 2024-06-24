@@ -64,7 +64,7 @@ const Project = () => {
           <Col lg={10}>
             <Card>
               <CardBody>
-                <h4 className="card-title mb-4">Sample Data Visualization</h4>
+                <h4 className="card-title mb-4">Data Visualization</h4>
                 <div style={{ width: '100%', height: 300 }}>
                   <ResponsiveContainer>
                     <LineChart data={sampleData}>

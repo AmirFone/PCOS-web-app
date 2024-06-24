@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Navbar,
   Nav,
@@ -6,73 +6,93 @@ import {
   NavItem,
   NavLink,
   Container,
-  Collapse
+  Collapse,
+  Button
 } from "reactstrap";
 import { Link } from "react-router-dom";
-
+import { motion } from "framer-motion";
+import { FaFacebookF, FaTwitter, FaInstagram, FaLinkedinIn } from "react-icons/fa";
 // Import Logo
 import logodark from "../../assets/images/logo-dark.png";
 import logolight from "../../assets/images/logo-light.png";
 
-//import icon
-import FeatherIcon from "feather-icons-react";
-
 import ScrollspyNav from "./Scrollspy";
 
-class NavbarPage extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      navItems: [
-        { id: 1, idnm: "home", navheading: "Home" },
-        { id: 2, idnm: "features", navheading: "Features" },
-        { id: 3, idnm: "success", navheading: "Success Stories" },
-        { id: 4, idnm: "resources", navheading: "PCOS Resources" },
-        { id: 5, idnm: "contact", navheading: "Contact Us" },
-      ],
-      isOpenMenu: false,
+const NavbarPage = (props) => {
+  const [isOpenMenu, setIsOpenMenu] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  const navItems = [
+    { id: 1, idnm: "home", navheading: "Home" },
+    { id: 2, idnm: "features", navheading: "Features" },
+    { id: 3, idnm: "success", navheading: "Success Stories" },
+    { id: 4, idnm: "resources", navheading: "PCOS Resources" },
+    { id: 5, idnm: "contact", navheading: "Contact Us" },
+  ];
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const offset = window.scrollY;
+      if (offset > 50) {
+        setScrolled(true);
+      } else {
+        setScrolled(false);
+      }
     };
-  }
-  render() {
-    let targetId = this.props.navItems.map((item) => {
-      return item.idnm;
-    });
-    return (
-      <React.Fragment>
+
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
+  const toggle = () => setIsOpenMenu(!isOpenMenu);
+
+  let targetId = props.navItems.map((item) => item.idnm);
+
+  return (
+    <React.Fragment>
+      <Navbar
+        expand="lg"
+        fixed={props.top === true ? "top" : ""}
+        className={`${props.navClass} ${
+          scrolled ? "navbar-scrolled" : ""
+        } fixed-top navbar-custom sticky align-items-center`}
+        id="navbar"
+      >
         <Container>
-          <Navbar
-            expand="lg"
-            fixed={this.props.top === true ? "top" : ""}
-            className={this.props.navClass + " fixed-top navbar-custom sticky sticky-dark align-items-center"}
-            id="navbar"
-            container
+          <motion.div
+            initial={{ opacity: 0, x: -50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5 }}
           >
-            <Link className="logo me-3" to="/">
-              {this.props.imglight === true ? (
-                <img src={logolight} alt="" height="26" />
-              ) : (
-                <img src={logodark} alt="" height="26" />
-              )}
+            <Link className="navbar-brand" to="/">
+              <img
+                src={props.imglight === true ? logolight : logodark}
+                alt="logo"
+                height="80"
+              />
             </Link>
-            <NavbarToggler onClick={this.toggle}>
-              <span className="ti-menu"></span>
-            </NavbarToggler>
-            <Collapse
-              id="navbarCollapse"
-              isOpen={this.state.isOpenMenu}
-              className=" navbar-collapse"
+          </motion.div>
+          <NavbarToggler onClick={toggle}>
+            <span className="navbar-toggler-icon"></span>
+          </NavbarToggler>
+          <Collapse isOpen={isOpenMenu} navbar id="navbarCollapse">
+            <ScrollspyNav
+              scrollTargetIds={targetId}
+              scrollDuration="800"
+              headerBackground="true"
+              activeNavClass="active"
+              className="navbar-collapse"
             >
-              <ScrollspyNav
-                scrollTargetIds={targetId}
-                scrollDuration="800"
-                headerBackground="true"
-                activeNavClass="active"
-                className="navbar-collapse"
-              >
-                <Nav className="navbar-nav navbar-center" id="navbar-navlist">
-                  {this.props.navItems.map((item, key) => (
+              <Nav className="navbar-nav ms-auto" id="navbar-navlist">
+                {props.navItems.map((item, key) => (
+                  <motion.div
+                    key={key}
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
                     <NavItem
-                      key={key}
                       className={item.navheading === "Home" ? "active" : ""}
                     >
                       <NavLink
@@ -82,29 +102,43 @@ class NavbarPage extends Component {
                         {item.navheading}
                       </NavLink>
                     </NavItem>
-                  ))}
-                </Nav>
-                <ul className="list-inline ml-auto menu-social-icon mb-0 py-2 py-lg-0">
-                  <li className="list-inline-item ml-0">
-                    <Link to="#" className="menu-social-link"><FeatherIcon icon="facebook" className="icon-xs sw_1-5" /></Link>
-                  </li>{" "}
-                  <li className="list-inline-item">
-                    <Link to="#" className="menu-social-link"><FeatherIcon icon="twitter" className="icon-xs sw_1-5" /></Link>
-                  </li>{" "}
-                  <li className="list-inline-item">
-                    <Link to="#" className="menu-social-link"><FeatherIcon icon="instagram" className="icon-xs sw_1-5" /></Link>
-                  </li>{" "}
-                  <li className="list-inline-item mr-0">
-                    <Link to="#" className="menu-social-link"><FeatherIcon icon="linkedin" className="icon-xs sw_1-5" /></Link>
-                  </li>
-                </ul>
-              </ScrollspyNav>
-            </Collapse>
-          </Navbar>
+                  </motion.div>
+                ))}
+              </Nav>
+            </ScrollspyNav>
+            <motion.div
+              initial={{ opacity: 0, x: 50 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+            >
+              <Button color="primary" className="rounded-pill">
+                Download App
+              </Button>
+            </motion.div>
+            {/* <ul className="list-inline menu-social-icon mb-0 ps-3">
+              {[
+                { icon: FaFacebookF, link: "#" },
+                { icon: FaTwitter, link: "#" },
+                { icon: FaInstagram, link: "#" },
+                { icon: FaLinkedinIn, link: "#" },
+              ].map((social, index) => (
+                <motion.li
+                  key={index}
+                  className="list-inline-item"
+                  whileHover={{ scale: 1.2 }}
+                  whileTap={{ scale: 0.9 }}
+                >
+                  <Link to={social.link} className="menu-social-link">
+                    <social.icon className="icon-xs" />
+                  </Link>
+                </motion.li>
+              ))}
+            </ul> */}
+          </Collapse>
         </Container>
-      </React.Fragment>
-    );
-  }
-}
-// }
+      </Navbar>
+    </React.Fragment>
+  );
+};
+
 export default NavbarPage;

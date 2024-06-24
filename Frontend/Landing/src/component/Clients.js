@@ -1,119 +1,110 @@
 import React from "react";
 import { Col, Container, Row } from "reactstrap";
-import Slider from "react-slick";
+import { motion } from "framer-motion";
+import { FaQuoteLeft } from "react-icons/fa";
 
-// Import client Image
-import Icon from "../assets/images/testi-icon.png";
+// Import client images
 import Img1 from "../assets/images/user/img-1.jpg";
 import Img2 from "../assets/images/user/img-2.jpg";
 import Img3 from "../assets/images/user/img-3.jpg";
 import Img4 from "../assets/images/user/img-4.jpg";
 
 const Clients = () => {
-  const items = [
+  const testimonials = [
     {
       id: 1,
       img: Img1,
       name: 'Sarah Johnson',
-      quote: 'The PCOS app has been a lifesaver for me. It has helped me track my symptoms, learn more about my condition, and connect with a supportive community.'
+      age: 28,
+      occupation: 'Marketing Manager',
+      quote: 'This PCOS app has been a game-changer for me. I can now easily track my symptoms and receive personalized recommendations. It\'s like having a PCOS expert in my pocket!'
     },
     {
       id: 2,
       img: Img2,
       name: 'Emily Davis',
-      quote: 'I love how easy it is to use this app to log my symptoms and get personalized recommendations. It has empowered me to take control of my PCOS journey.'
+      age: 32,
+      occupation: 'Fitness Instructor',
+      quote: 'As a fitness instructor with PCOS, I love how this app integrates with my fitness tracker. It helps me understand the connection between my workouts and PCOS symptoms.'
     },
     {
       id: 3,
       img: Img3,
       name: 'Jessica Thompson',
-      quote: 'As someone newly diagnosed with PCOS, this app has been an invaluable resource. It has provided me with the information and support I need to manage my symptoms.'
+      age: 25,
+      occupation: 'Graphic Designer',
+      quote: 'The community feature in this app is incredible. I no longer feel alone in my PCOS journey. Sharing experiences and tips with others has been so empowering.'
     },
     {
       id: 4,
       img: Img4,
       name: 'Hannah Wilson',
-      quote: 'I appreciate the holistic approach this app takes to PCOS management. It has helped me make positive lifestyle changes and feel more in control of my health.'
+      age: 30,
+      occupation: 'Teacher',
+      quote: 'I appreciate how the app educates me about PCOS. The personalized health tips have helped me make positive lifestyle changes, and I\'ve seen a significant improvement in my symptoms.'
     },
   ];
 
-  const settings = {
-    dots: true,
-    speed: 300,
-    infinite: true,
-    slidesToShow: 3,
-    slidesToScroll: 1,
-    arrows: false,
-    centerPadding: '20px',
-    responsive: [
-      {
-        breakpoint: 1000,
-        settings: {
-          slidesToShow: 3,
-          infinite: true,
-          centerPadding: '20px'
-        }
-      },
-      {
-        breakpoint: 600,
-        settings: {
-          slidesToShow: 2,
-          infinite: true,
-          centerPadding: '20px'
-        }
-      },
-      {
-        breakpoint: 0,
-        settings: {
-          slidesToShow: 1,
-          infinite: true,
-          centerPadding: '20px'
-        }
-      }
-    ]
-  };
-
   return (
-    <React.Fragment>
-      <section className="section" id="clients">
-        <Container>
-          <Row className="justify-content-center">
-            <Col lg={7}>
-              <div className="text-center mb-5">
-                <h2 className="">What Our Users research has found </h2>
-                <p className="text-muted">Hear from people who have found support and empowerment in managing their PCOS with our app.</p>
-              </div>
-            </Col>
-          </Row>
-          <Row>
-            <Col lg={12}>
-              <div id="testi-clients" className="owl-carousel owl-theme testi-content">
-                <Slider {...settings}>
-                  {items.map((item, key) => (
-                    <div className="item" key={key}>
-                      <div className="testi-box text-center m-2">
-                        <div className="card border-0 shadow p-4 mb-4">
-                          <div className="mt-1 mb-3">
-                            <img src={Icon} alt="" className="testi-icon img-fluid d-block mx-auto w-auto" />
-                          </div>
-                          <p className="text-muted mb-0 f-15">{item.quote}</p>
-                        </div>
-                        <div className="test-user-info">
-                          <div className="avatar-md mx-auto">
-                            <img src={item.img} alt="" className="img-fluid d-block rounded-circle testi-user-img" />
-                          </div>
-                          <h5 className="f-17 mt-3 mb-1">{item.name}</h5>
-                        </div>
-                      </div>
+    <section className="section bg-light" id="clients">
+      <Container>
+        <Row className="justify-content-center">
+          <Col lg={8}>
+            <div className="text-center mb-5">
+              <h2 className="font-weight-bold mb-4">Real Stories from Our Users</h2>
+              <p className="text-muted">
+                After conducting extensive user interviews, we've discovered a significant demand for a comprehensive PCOS management solution. Here's what some of our users have to say about how our app has transformed their PCOS journey.
+              </p>
+            </div>
+          </Col>
+        </Row>
+        <Row>
+          {testimonials.map((testimonial, index) => (
+            <Col lg={6} key={testimonial.id} className="mb-4">
+              <motion.div
+                initial={{ opacity: 0, y: 50 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+              >
+                <div className="testimonial-card bg-white p-4 rounded shadow">
+                  <div className="d-flex align-items-center mb-4">
+                    <img
+                      src={testimonial.img}
+                      alt={testimonial.name}
+                      className="rounded-circle mr-3"
+                      width="60"
+                      height="60"
+                    />
+                    <div>
+                      <h5 className="mb-0">{testimonial.name}</h5>
+                      <p className="text-muted mb-0">
+                        {testimonial.age} • {testimonial.occupation}
+                      </p>
                     </div>
-                  ))}
-                </Slider>
-              </div>
+                  </div>
+                  <FaQuoteLeft className="text-primary mb-3" size={24} />
+                  <p className="text-muted">{testimonial.quote}</p>
+                </div>
+              </motion.div>
             </Col>
-          </Row>
-        </Container>
-      </section>
-    </React.Fragment>
+          ))}
+        </Row>
+        <Row className="mt-5">
+          <Col lg={12}>
+            <div className="text-center">
+              <h3 className="mb-4">Join Thousands of Women Taking Control of Their PCOS</h3>
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="btn btn-primary btn-lg"
+              >
+                Download the App Now
+              </motion.button>
+            </div>
+          </Col>
+        </Row>
+      </Container>
+    </section>
   );
 };
 
