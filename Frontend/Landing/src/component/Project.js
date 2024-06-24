@@ -1,113 +1,115 @@
-import React, { Component } from "react";
-import {
-  Col,
-  Container,
-  Row
-} from "reactstrap";
-
-//import icon
+import React from "react";
+import { Container, Row, Col, Card, CardBody } from "reactstrap";
+import { Link } from "react-router-dom";
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import FeatherIcon from "feather-icons-react";
 
-import { Link } from "react-router-dom";
-
-// feature Image
-import Img1 from "../assets/images/project/img-1.jpg";
-import Img2 from "../assets/images/project/img-2.jpg";
-import Img3 from "../assets/images/project/img-3.jpg";
-import Img4 from "../assets/images/project/img-4.jpg";
-import Img5 from "../assets/images/project/img-5.jpg";
-import Img6 from "../assets/images/project/img-6.jpg";
-
-export default class Project extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      projects: [
-        {
-          id: 1,
-          img: Img1,
-          title: 'Professional Designer',
-          designation: 'UI/UX Designer'
-        },
-        {
-          id: 2,
-          img: Img2,
-          title: 'Product Designer',
-          designation: 'Web Designer'
-        },
-        {
-          id: 3,
-          img: Img3,
-          title: 'Design Development',
-          designation: 'PHP Developer'
-        },
-        {
-          id: 4,
-          img: Img4,
-          title: 'Product Designer',
-          designation: 'React Developer'
-        },
-        {
-          id: 5,
-          img: Img5,
-          title: 'Design Development',
-          designation: 'UI/UX Designer'
-        },
-        {
-          id: 6,
-          img: Img6,
-          title: 'Graphic Development',
-          designation: 'Web Designer'
-        },
-      ],
-    };
+const features = [
+  {
+    icon: "calendar",
+    title: "Symptom Tracking",
+    description: "Log and monitor your PCOS-related symptoms to identify patterns and trends."
+  },
+  {
+    icon: "smartphone",
+    title: "Patient-Physician Communication",
+    description: "Share real-time health updates with your healthcare provider for better care."
+  },
+  {
+    icon: "users",
+    title: "Community Support",
+    description: "Connect with others who understand the challenges of living with PCOS."
+  },
+  {
+    icon: "activity",
+    title: "Personalized Recommendations",
+    description: "Receive tailored health tips and lifestyle suggestions based on your data."
+  },
+  {
+    icon: "book",
+    title: "PCOS Education",
+    description: "Access a curated library of articles and resources about PCOS management."
+  },
+  {
+    icon: "map-pin",
+    title: "Specialist Finder",
+    description: "Locate PCOS specialists in your area using our zip code search feature."
   }
+];
 
-  render() {
-    return (
-      <React.Fragment>
-        <section className="section bg-light" id="project">
-          <Container>
-            <Row className="justify-content-center">
-              <div className="col-lg-7">
-                <div className="text-center mb-5">
-                  <h2 className="">Our Latest Project</h2>
-                  <p className="text-muted">Ut enim ad minima veniam quis nostrum exercitationem ullam corporis suscipit laboriosam nisi commodi consequatur.</p>
+const sampleData = [
+  { name: 'Week 1', symptoms: 4, weight: 150 },
+  { name: 'Week 2', symptoms: 3, weight: 149 },
+  { name: 'Week 3', symptoms: 2, weight: 148 },
+  { name: 'Week 4', symptoms: 5, weight: 151 },
+  { name: 'Week 5', symptoms: 1, weight: 147 },
+];
+
+const Project = () => {
+  return (
+    <section className="section bg-light" id="project">
+      <Container>
+        <Row className="justify-content-center">
+          <Col lg={8}>
+            <div className="text-center mb-5">
+              <h2 className="mb-3">Empowering PCOS Management</h2>
+              <p className="text-muted">
+                Our companion app helps individuals with PCOS take control of their health journey through personalized tracking, education, and community support.
+              </p>
+            </div>
+          </Col>
+        </Row>
+
+        <Row className="justify-content-center mb-5">
+          <Col lg={10}>
+            <Card>
+              <CardBody>
+                <h4 className="card-title mb-4">Sample Data Visualization</h4>
+                <div style={{ width: '100%', height: 300 }}>
+                  <ResponsiveContainer>
+                    <LineChart data={sampleData}>
+                      <CartesianGrid strokeDasharray="3 3" />
+                      <XAxis dataKey="name" />
+                      <YAxis yAxisId="left" />
+                      <YAxis yAxisId="right" orientation="right" />
+                      <Tooltip />
+                      <Line yAxisId="left" type="monotone" dataKey="symptoms" stroke="#8884d8" name="Symptoms" />
+                      <Line yAxisId="right" type="monotone" dataKey="weight" stroke="#82ca9d" name="Weight (lbs)" />
+                    </LineChart>
+                  </ResponsiveContainer>
                 </div>
-              </div>
-            </Row>
-            <Row>
-              {/* Render Footer Link */}
-              {this.state.projects.map((item, key) => (
-                <Col lg={4} md={6} key={key}>
-                  <div className="project-box mb-4">
-                    <div className="position-relative overflow-hidden rounded">
-                      <img src={item.img} alt="" className="img-fluid d-block mx-auto shadow" />
-                      <div className="project-overlay">
-                        <div className="project-content">
-                          <Link to="#">
-                            <div className="project-icon">
-                              <i>
-                                <FeatherIcon icon="eye" />
-                              </i>
-                            </div>
-                          </Link>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="p-3">
-                      <h4 className="f-17 mb-1">
-                        <Link to="#" className="text-dark">{item.title}</Link>
-                      </h4>
-                      <p className="text-muted">{item.designation}</p>
-                    </div>
+              </CardBody>
+            </Card>
+          </Col>
+        </Row>
+
+        <Row>
+          {features.map((feature, index) => (
+            <Col lg={4} md={6} key={index}>
+              <Card className="mb-4">
+                <CardBody>
+                  <div className="text-primary mb-4">
+                    <FeatherIcon icon={feature.icon} size={24} />
                   </div>
-                </Col>
-              ))}
-            </Row>
-          </Container>
-        </section>
-      </React.Fragment>
-    );
-  }
-}
+                  <h4 className="card-title mb-3">{feature.title}</h4>
+                  <p className="card-text text-muted">{feature.description}</p>
+                </CardBody>
+              </Card>
+            </Col>
+          ))}
+        </Row>
+
+        <Row className="justify-content-center mt-5">
+          <Col lg={6} className="text-center">
+            <p className="mb-4">Ready to take control of your PCOS journey?</p>
+            <Link to="#" className="btn btn-primary">
+              Get Started
+            </Link>
+          </Col>
+        </Row>
+      </Container>
+    </section>
+  );
+};
+
+export default Project;
