@@ -112,7 +112,7 @@ const NavbarPage = (props) => {
               transition={{ duration: 0.5, delay: 0.2 }}
             >
               <Button color="primary" className="rounded-pill">
-                Download App
+                Sign up
               </Button>
             </motion.div>
             {/* <ul className="list-inline menu-social-icon mb-0 ps-3">
