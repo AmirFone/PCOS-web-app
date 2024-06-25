@@ -21,6 +21,13 @@
 13.contact
 14.footer
 ***********************/
+:root {
+  --primary-color: #5DB8C0; // Fountain Blue
+  --secondary-color: #BBACE3; // Cold Purple
+  --accent-color: #8682BB; // Wild Blue Yonder
+  --background-color: #34385F; // Pickled Bluewood
+  --text-color: #FFFFFF; // White for contrast
+}
 
 @import "variables";
 @import "general";
@@ -38,55 +45,45 @@
 @import "contact";
 @import "footer";
 @import 'navbar';
+.navbar-scrolled {
+  background-color: #ffffff;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
 
+  .nav-link {
+    color: #333333;
+  }
 
-// Update color variables
-$primary: #5DB8C0; // Fountain Blue
-$secondary: #BBACE3; // Cold Purple
-$success: #8682BB; // Wild Blue Yonder
-$info: #34385F; // Pickled Bluewood
-$warning: #BBACE3; // Using Cold Purple as warning
-$danger: #f43958; // Keeping original danger color
-$dark: #34385F; // Pickled Bluewood
-$light: #FFFFFF;
-
-// Update other variables as needed
-$body-bg: $dark;
-$body-color: $light;
-
-// Update component colors
-$navbar-light-color: $light;
-$navbar-light-hover-color: $primary;
-$navbar-light-active-color: $primary;
-
-// Import Bootstrap
-@import "bootstrap/scss/bootstrap";
-
-// Custom styles
-body {
-  font-family: $font-family-sans-serif;
-  color: $body-color;
-  background-color: $body-bg;
-}
-
-.navbar-custom {
-  background-color: $dark;
-  
-  .navbar-nav .nav-link {
-    color: $light;
-    
-    &:hover, &:focus, &.active {
-      color: $primary;
-    }
+  .navbar-brand img {
+    filter: none;
   }
 }
+.navbar-custom {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
 
-.btn-primary {
-  background-color: $primary;
-  border-color: $primary;
-  
-  &:hover, &:focus, &:active {
-    background-color: darken($primary, 10%);
-    border-color: darken($primary, 10%);
+.navbar-brand {
+  display: flex;
+  align-items: center;
+}
+
+.navbar-brand img {
+  max-height: 60px;
+  width: auto;
+}
+
+.navbar-nav {
+  align-items: center;
+}
+
+@media (max-width: 991.98px) {
+  .navbar-custom {
+    padding-top: 0.25rem;
+    padding-bottom: 0.25rem;
+  }
+
+  .navbar-brand img {
+    max-height: 50px;
   }
 }

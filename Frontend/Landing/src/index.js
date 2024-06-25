@@ -7,9 +7,9 @@ const root = ReactDOM.createRoot(
   document.getElementById('root')
 );
 root.render(
-  <React.Fragment>
-      <BrowserRouter>
-          <App />
-      </BrowserRouter>
-  </React.Fragment>
+  <React.StrictMode>
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+  </React.StrictMode>
 );

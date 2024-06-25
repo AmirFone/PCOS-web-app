@@ -9,7 +9,7 @@ const Services = React.lazy(() => import("../../component/Services"));
 const Feature = React.lazy(() => import("../../component/Feature"));
 const Project = React.lazy(() => import("../../component/Project"));
 const Clients = React.lazy(() => import("../../component/Clients"));
-const News = React.lazy(() => import("../../component/News"));
+// const News = React.lazy(() => import("../../component/News"));
 const Contact = React.lazy(() => import("../../component/Contact"));
 const Footer = React.lazy(() => import("../../component/Footer/Footer"));
 
@@ -93,8 +93,8 @@ class Layout1 extends Component {
           {/* Importing Client */}
           <Clients />
 
-          {/* Importing News */}
-          <News />
+          {/* Importing News
+          <News /> */}
 
           {/* Importing Contact Us */}
           <Contact />

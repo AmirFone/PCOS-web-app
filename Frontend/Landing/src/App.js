@@ -1,32 +1,41 @@
-import React, { Component } from "react";
-import routes from "../src/routes";
-import withRouter from "./component/withRouter";
-import {
-  Route,
-  Routes,
-} from "react-router-dom";
+import React, { Component, Suspense } from "react";
+import { Routes, Route } from "react-router-dom";
+import routes from "./routes";
+import { AuthProvider } from './context/AuthContext';
 
-//import style
-import "./assets/css/pe-icon-7.css";
-
-import "./assets/scss/themes.scss";
+// Import your existing components
+import Navbar from "./component/Navbar/NavBar";
+import Footer from "./component/Footer/Footer";
 
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      navClass: "navbar-light",
+      imglight: false
+    };
   }
+
   render() {
     return (
       <React.Fragment>
-        <Routes>
+        <AuthProvider>
+          <Suspense fallback={<div>Loading...</div>}>
+            <Navbar 
+              navClass={this.state.navClass}
+              imglight={this.state.imglight}
+            />
+            <Routes>
               {routes.map((route, idx) => (
                 <Route path={route.path} element={route.component} key={idx} />
               ))}
-          </Routes>
+            </Routes>
+            <Footer />
+          </Suspense>
+        </AuthProvider>
       </React.Fragment>
     );
   }
 }
 
-export default withRouter(App);
+export default App;
