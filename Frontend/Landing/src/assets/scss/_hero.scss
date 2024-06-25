@@ -119,3 +119,23 @@
     }
 }
 
+.hero-section {
+    background-color: $info;
+    color: $light;
+    
+    h1 {
+      color: $primary;
+    }
+    
+    .btn-primary {
+      background-color: $secondary;
+      border-color: $secondary;
+      color: $dark;
+      
+      &:hover, &:focus, &:active {
+        background-color: darken($secondary, 10%);
+        border-color: darken($secondary, 10%);
+        color: $dark;
+      }
+    }
+  }

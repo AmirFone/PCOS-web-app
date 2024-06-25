@@ -1,49 +1,25 @@
-//
-// contact.scss
-//
-
-.form-control:focus {
-    box-shadow: none;
-    background-color: $light;
-    border-color: $primary;
-}
-
-.form-control {
-    padding: 8px 10px;
-    font-size: 14px;
-    height: 40px;
-    background-color: rgba($dark, 0.01);
-    border: 1px solid rgba($muted, 0.3);
-    &::placeholder {
-        color: lighten($muted, 6%);
-        font-size: 14px;
+.contact-section {
+    background-color: $info;
+    color: $light;
+    
+    .form-control {
+      background-color: rgba($light, 0.1);
+      border-color: rgba($light, 0.2);
+      color: $light;
+      
+      &:focus {
+        background-color: rgba($light, 0.2);
+        border-color: $primary;
+      }
     }
-}
-
-.error {
-    margin: 8px 0px;
-    display: none;
-    color: $danger;
-}
-
-#ajaxsuccess {
-    font-size: 16px;
-    width: 100%;
-    display: none;
-    clear: both;
-    margin: 8px 0px;
-}
-
-.error_message {
-    padding: 10px;
-    margin-bottom: 20px;
-    text-align: center;
-    border: 2px solid $danger;
-    color: $danger;
-    border-radius: 5px;
-    font-size: 14px;
-}
-
-.contact-loader {
-    display: none;
-}
+    
+    .btn-primary {
+      background-color: $primary;
+      border-color: $primary;
+      
+      &:hover, &:focus, &:active {
+        background-color: darken($primary, 10%);
+        border-color: darken($primary, 10%);
+      }
+    }
+  }

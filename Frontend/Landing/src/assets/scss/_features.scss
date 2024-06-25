@@ -1,15 +1,24 @@
-//
-// features.scss
-//
-
-.features-content {
-    .nav {
-        .nav-link {
-            padding: 30px;
-            &.active {
-                background: $white !important;
-                box-shadow: $shadow;
-            }
-        }
+.features-section {
+    background-color: $light;
+    color: $dark;
+    
+    .feature-item {
+      background-color: rgba($secondary, 0.1);
+      border-radius: 8px;
+      padding: 20px;
+      transition: all 0.3s ease;
+      
+      &:hover {
+        background-color: rgba($secondary, 0.2);
+        transform: translateY(-5px);
+      }
+      
+      .feature-icon {
+        color: $primary;
+      }
+      
+      h3 {
+        color: $info;
+      }
     }
-}
+  }
