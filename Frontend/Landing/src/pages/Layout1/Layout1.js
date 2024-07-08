@@ -23,7 +23,7 @@ class Layout1 extends Component {
         { id: 3, idnm: "services", navheading: "Services" },
         { id: 4, idnm: "features", navheading: "Features" },
         { id: 5, idnm: "project", navheading: "Project" },
-        { id: 6, idnm: "clients", navheading: "Clients" },
+        // { id: 6, idnm: "clients", navheading: "Clients" },
         { id: 7, idnm: "contact", navheading: "Contact Us" },
       ],
       pos: document.documentElement.scrollTop,
@@ -91,10 +91,10 @@ class Layout1 extends Component {
           <Project />
 
           {/* Importing Client */}
-          <Clients />
+          {/* <Clients /> */}
 
           {/* Importing News */}
-          <News />
+          {/* <News /> */}
 
           {/* Importing Contact Us */}
           <Contact />
