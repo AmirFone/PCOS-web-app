@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import { Container, Row, Col, Button, Card, CardBody } from 'reactstrap';
@@ -8,6 +8,16 @@ import { motion } from 'framer-motion';
 function Login() {
   const { signInWithGoogle } = useAuth();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    // Add a class to the body when the Login component mounts
+    document.body.classList.add('login-page');
+    
+    // Remove the class when the component unmounts
+    return () => {
+      document.body.classList.remove('login-page');
+    };
+  }, []);
 
   const handleLogin = async () => {
     try {
@@ -19,7 +29,7 @@ function Login() {
   };
 
   return (
-    <div className="login-page py-5" style={{minHeight: '100vh', display: 'flex', alignItems: 'center'}}>
+    <div className="login-page-content py-5" style={{minHeight: '100vh', display: 'flex', alignItems: 'center'}}>
       <Container>
         <Row className="justify-content-center">
           <Col md={8} lg={6} xl={5}>

@@ -1,5 +1,25 @@
 .login-page {
 	background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+      
+	.navbar-custom {
+	  .nav-link {
+	    color: #333 !important; // Darker color for better contrast
+	    font-weight: 500; // Make the text slightly bolder
+	    
+	    &:hover, &:focus {
+	      color: #000 !important; // Even darker on hover/focus
+	    }
+	  }
+	  
+	  .active .nav-link {
+	    color: #000 !important; // Darkest color for active item
+	    font-weight: 700; // Make active item bold
+	  }
+	}
+      }
+      
+      .login-page-content {
+	padding-top: 80px; // Add some top padding to account for the fixed navbar
       }
       
       .btn-icon {

@@ -1,7 +1,7 @@
 import React from 'react';
 import Layout1 from "./pages/Layout1/Layout1";
 import Login from "./component/Login";
-import Profile from "./component/Profile";
+import Profile from "./component/Profile/Profile";  // Update this line
 import { Navigate } from 'react-router-dom';
 import { useAuth } from './context/AuthContext';
 
