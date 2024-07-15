@@ -3,7 +3,6 @@ import { Routes, Route } from "react-router-dom";
 import routes from "./routes";
 import { AuthProvider } from './context/AuthContext';
 
-// Import your existing components
 import Navbar from "./component/Navbar/NavBar";
 import Footer from "./component/Footer/Footer";
 

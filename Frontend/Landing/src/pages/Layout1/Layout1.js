@@ -91,7 +91,7 @@ class Layout1 extends Component {
           <Project />
 
           {/* Importing Client */}
-          <Clients />
+          {/* <Clients /> */}
 
           {/* Importing News
           <News /> */}

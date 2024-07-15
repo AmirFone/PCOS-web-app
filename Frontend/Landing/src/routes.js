@@ -12,7 +12,7 @@ const RequireAuth = ({ children }) => {
 
 const routes = [
   { path: "/", component: <Layout1 /> },
-  { path: "/features", component: <Layout1 /> }, // You might want to create separate components for these
+  { path: "/features", component: <Layout1 /> },
   { path: "/success", component: <Layout1 /> },
   { path: "/resources", component: <Layout1 /> },
   { path: "/contact", component: <Layout1 /> },
