@@ -1,40 +1,38 @@
-import React, { Component, Suspense } from "react";
-import { Routes, Route } from "react-router-dom";
+import React, { Suspense } from "react";
+import { Routes, Route, useLocation } from "react-router-dom";
 import routes from "./routes";
 import { AuthProvider } from './context/AuthContext';
 
+// Import your existing components
 import Navbar from "./component/Navbar/NavBar";
 import Footer from "./component/Footer/Footer";
 
-class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      navClass: "navbar-light",
-      imglight: false
-    };
-  }
+const App = () => {
+  const location = useLocation();
 
-  render() {
-    return (
-      <React.Fragment>
-        <AuthProvider>
-          <Suspense fallback={<div>Loading...</div>}>
+  // Check if the current path is /profile
+  const isProfilePage = location.pathname === '/profile';
+
+  return (
+    <React.Fragment>
+      <AuthProvider>
+        <Suspense fallback={<div>Loading...</div>}>
+          {!isProfilePage && (
             <Navbar 
-              navClass={this.state.navClass}
-              imglight={this.state.imglight}
+              navClass="navbar-light"
+              imglight={false}
             />
-            <Routes>
-              {routes.map((route, idx) => (
-                <Route path={route.path} element={route.component} key={idx} />
-              ))}
-            </Routes>
-            <Footer />
-          </Suspense>
-        </AuthProvider>
-      </React.Fragment>
-    );
-  }
-}
+          )}
+          <Routes>
+            {routes.map((route, idx) => (
+              <Route path={route.path} element={route.component} key={idx} />
+            ))}
+          </Routes>
+          <Footer />
+        </Suspense>
+      </AuthProvider>
+    </React.Fragment>
+  );
+};
 
 export default App;
