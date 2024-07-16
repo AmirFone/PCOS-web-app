@@ -28,7 +28,6 @@ const App = () => {
               <Route path={route.path} element={route.component} key={idx} />
             ))}
           </Routes>
-          <Footer />
         </Suspense>
       </AuthProvider>
     </React.Fragment>

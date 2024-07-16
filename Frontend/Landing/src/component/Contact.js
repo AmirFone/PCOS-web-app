@@ -34,20 +34,20 @@ export default class Contact extends Component {
                     <Link to="#" className="btn btn-primary">
                       <FaRobot className="mr-2" /> Chat with AI Assistant
                     </Link>
-                    <p className="mt-4">Or reach out to our support team:</p>
+                    {/* <p className="mt-4">Or reach out to our support team:</p> */}
                     <Row>
                       <Col md={6}>
                         <Link to="#">
-                          <div className="badge f-14 bg-soft-dark text-muted">
+                          {/* <div className="badge f-14 bg-soft-dark text-muted">
                             <span className="text-dark mr-1">Email:</span> info@pcosapp.com
-                          </div>
+                          </div> */}
                         </Link>
                       </Col>
                       <Col md={6} className="mt-2 mt-sm-0">
                         <Link to="#">
-                          <div className="badge f-14 bg-soft-dark text-muted">
+                          {/* <div className="badge f-14 bg-soft-dark text-muted">
                             <span className="text-dark mr-1">Phone:</span> (123) 456-7890
-                          </div>
+                          </div> */}
                         </Link>
                       </Col>
                     </Row>
