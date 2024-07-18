@@ -1,3 +1,4 @@
+// src/component/Profile/Profile.js
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../../context/AuthContext';
 import { db } from '../../firebase';
@@ -13,7 +14,8 @@ import AIChat from './AIChat';
 import MenstrualCycleTracker from './MenstrualCycleTracker';
 import SymptomJournal from './SymptomJournal';
 import MedicationTracker from './MedicationTracker';
-import { FaRobot, FaWeight, FaVial, FaCalendar, FaNotesMedical, FaPills, FaFile } from 'react-icons/fa';
+import SymptomTracker from './SymptomTracker';
+import { FaRobot, FaWeight, FaVial, FaCalendar, FaNotesMedical, FaPills, FaFile, FaChartLine } from 'react-icons/fa';
 
 function Profile() {
   const { currentUser, logout } = useAuth();
@@ -42,7 +44,8 @@ function Profile() {
             files: [],
             menstrualCycles: [],
             symptomJournal: [],
-            medications: []
+            medications: [],
+            symptomEntries: []
           };
           await setDoc(docRef, newProfile);
           setProfile(newProfile);
@@ -67,6 +70,12 @@ function Profile() {
     if(activeTab !== tab) setActiveTab(tab);
   }
 
+  const setProfileAndUpdateFirestore = async (newProfile) => {
+    setProfile(newProfile);
+    const userRef = doc(db, 'users', currentUser.uid);
+    await setDoc(userRef, newProfile);
+  };
+
   const handleQuickWeightAdd = async (e) => {
     e.preventDefault();
     if (!quickWeight || !profile) return;
@@ -77,9 +86,7 @@ function Profile() {
       weightEntries: [...(profile.weightEntries || []), newEntry]
     };
 
-    const userRef = doc(db, 'users', currentUser.uid);
-    await setDoc(userRef, updatedProfile);
-    setProfile(updatedProfile);
+    await setProfileAndUpdateFirestore(updatedProfile);
     setQuickWeight('');
   };
 
@@ -93,9 +100,7 @@ function Profile() {
       symptomJournal: [...(profile.symptomJournal || []), newEntry]
     };
 
-    const userRef = doc(db, 'users', currentUser.uid);
-    await setDoc(userRef, updatedProfile);
-    setProfile(updatedProfile);
+    await setProfileAndUpdateFirestore(updatedProfile);
     setQuickSymptom('');
   };
 
@@ -187,10 +192,18 @@ function Profile() {
                 <FaPills /> Medications
               </NavLink>
             </NavItem>
-            <NavItem>
+	    <NavItem>
               <NavLink
                 className={classnames({ active: activeTab === '6' })}
                 onClick={() => { toggle('6'); }}
+              >
+                <FaChartLine /> Symptom Tracker
+              </NavLink>
+            </NavItem>
+            <NavItem>
+              <NavLink
+                className={classnames({ active: activeTab === '7' })}
+                onClick={() => { toggle('7'); }}
               >
                 <FaFile /> Files
               </NavLink>
@@ -198,22 +211,25 @@ function Profile() {
           </Nav>
           <TabContent activeTab={activeTab}>
             <TabPane tabId="1">
-              <WeightTracker profile={profile} setProfile={setProfile} />
+              <WeightTracker profile={profile} setProfile={setProfileAndUpdateFirestore} />
             </TabPane>
             <TabPane tabId="2">
-              <HormoneTracker profile={profile} setProfile={setProfile} />
+              <HormoneTracker profile={profile} setProfile={setProfileAndUpdateFirestore} />
             </TabPane>
             <TabPane tabId="3">
-              <MenstrualCycleTracker profile={profile} setProfile={setProfile} />
+              <MenstrualCycleTracker profile={profile} setProfile={setProfileAndUpdateFirestore} />
             </TabPane>
             <TabPane tabId="4">
-              <SymptomJournal profile={profile} setProfile={setProfile} />
+              <SymptomJournal profile={profile} setProfile={setProfileAndUpdateFirestore} />
             </TabPane>
             <TabPane tabId="5">
-              <MedicationTracker profile={profile} setProfile={setProfile} />
+              <MedicationTracker profile={profile} setProfile={setProfileAndUpdateFirestore} />
             </TabPane>
             <TabPane tabId="6">
-              <FileUpload profile={profile} setProfile={setProfile} />
+              <SymptomTracker profile={profile} setProfile={setProfileAndUpdateFirestore} />
+            </TabPane>
+	    <TabPane tabId="7">
+              <FileUpload profile={profile} setProfile={setProfileAndUpdateFirestore} />
             </TabPane>
           </TabContent>
         </Col>

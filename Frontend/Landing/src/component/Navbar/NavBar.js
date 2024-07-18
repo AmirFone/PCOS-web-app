@@ -12,6 +12,7 @@ import { Link, useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
 import { useAuth } from '../../context/AuthContext';
 
+// Import Logo
 import logodark from "../../assets/images/logo-dark.png";
 import logolight from "../../assets/images/logo-light.png";
 
@@ -23,10 +24,10 @@ const NavbarPage = (props) => {
 
   const navItems = [
     { id: 1, idnm: "home", navheading: "Home", path: "/" },
-    { id: 2, idnm: "features", navheading: "Features", path: "/features" },
-    { id: 3, idnm: "success", navheading: "Success Stories", path: "/success" },
-    { id: 4, idnm: "resources", navheading: "PCOS Resources", path: "/resources" },
-    { id: 5, idnm: "contact", navheading: "Contact Us", path: "/contact" },
+    { id: 2, idnm: "features", navheading: "Features", path: "/#features" },
+    // { id: 3, idnm: "success", navheading: "Success Stories", path: "/#success" },
+    { id: 4, idnm: "resources", navheading: "PCOS Resources", path: "/#resources" },
+    { id: 5, idnm: "contact", navheading: "Contact Us", path: "/#contact" },
   ];
 
   useEffect(() => {
@@ -46,6 +47,18 @@ const NavbarPage = (props) => {
   }, []);
 
   const toggle = () => setIsOpenMenu(!isOpenMenu);
+
+  const handleNavClick = (e, path) => {
+    e.preventDefault();
+    if (path.startsWith("/#")) {
+      const element = document.getElementById(path.substring(2));
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth" });
+      }
+    } else {
+      window.location.href = path;
+    }
+  };
 
   return (
     <React.Fragment>
@@ -83,7 +96,7 @@ const NavbarPage = (props) => {
                   whileTap={{ scale: 0.95 }}
                 >
                   <NavItem className={location.pathname === item.path ? "active" : ""}>
-                    <Link to={item.path} className="nav-link">
+                    <Link to={item.path} className="nav-link" onClick={(e) => handleNavClick(e, item.path)}>
                       {item.navheading}
                     </Link>
                   </NavItem>

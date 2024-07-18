@@ -82,8 +82,9 @@ class Layout1 extends Component {
           <About />
 
           {/* Importing Service */}
+          <section id="resources">
           <Services />
-
+          </section>
           {/* Importing Feature */}
           <Feature />
 
