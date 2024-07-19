@@ -1,4 +1,3 @@
-// src/component/Profile/Profile.js
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../../context/AuthContext';
 import { db } from '../../firebase';
@@ -15,7 +14,8 @@ import MenstrualCycleTracker from './MenstrualCycleTracker';
 import SymptomJournal from './SymptomJournal';
 import MedicationTracker from './MedicationTracker';
 import SymptomTracker from './SymptomTracker';
-import { FaRobot, FaWeight, FaVial, FaCalendar, FaNotesMedical, FaPills, FaFile, FaChartLine } from 'react-icons/fa';
+import FeedbackModal from './FeedbackModal';
+import { FaRobot, FaWeight, FaVial, FaCalendar, FaNotesMedical, FaPills, FaFile, FaChartLine, FaCommentAlt } from 'react-icons/fa';
 
 function Profile() {
   const { currentUser, logout } = useAuth();
@@ -25,6 +25,7 @@ function Profile() {
   const [activeTab, setActiveTab] = useState('1');
   const [quickWeight, setQuickWeight] = useState('');
   const [quickSymptom, setQuickSymptom] = useState('');
+  const [isFeedbackModalOpen, setIsFeedbackModalOpen] = useState(false);
 
   useEffect(() => {
     if (currentUser) {
@@ -45,7 +46,8 @@ function Profile() {
             menstrualCycles: [],
             symptomJournal: [],
             medications: [],
-            symptomEntries: []
+            symptomEntries: [],
+            lastFeedbackDate: null
           };
           await setDoc(docRef, newProfile);
           setProfile(newProfile);
@@ -55,6 +57,32 @@ function Profile() {
       fetchProfile();
     }
   }, [currentUser]);
+
+  useEffect(() => {
+    const checkFeedbackEligibility = async () => {
+      if (profile && (!profile.lastFeedbackDate || isEligibleForFeedback(profile.lastFeedbackDate))) {
+        const now = new Date();
+        if (now.getHours() >= 15) { // Check if it's 3 PM or later
+          setIsFeedbackModalOpen(true);
+          await updateLastFeedbackDate();
+        }
+      }
+    };
+
+    checkFeedbackEligibility();
+  }, [profile]);
+
+  const isEligibleForFeedback = (lastFeedbackDate) => {
+    if (!lastFeedbackDate) return true;
+    const now = new Date();
+    const lastFeedback = new Date(lastFeedbackDate);
+    return now.getTime() - lastFeedback.getTime() >= 24 * 60 * 60 * 1000; // 24 hours
+  };
+
+  const updateLastFeedbackDate = async () => {
+    const userRef = doc(db, 'users', currentUser.uid);
+    await setDoc(userRef, { lastFeedbackDate: new Date().toISOString() }, { merge: true });
+  };
 
   const handleLogout = async () => {
     try {
@@ -104,6 +132,10 @@ function Profile() {
     setQuickSymptom('');
   };
 
+  const toggleFeedbackModal = () => {
+    setIsFeedbackModalOpen(!isFeedbackModalOpen);
+  };
+
   if (!currentUser) return <Container><Row><Col><p>Please log in</p></Col></Row></Container>;
   if (loading) return <Container><Row><Col><Spinner color="primary" /></Col></Row></Container>;
 
@@ -145,6 +177,9 @@ function Profile() {
               </Form>
             </CardBody>
           </Card>
+          <Button color="info" className="mt-3 w-100" onClick={toggleFeedbackModal}>
+            <FaCommentAlt className="mr-2" /> Give Feedback
+          </Button>
           <Button color="danger" className="mt-3 w-100" onClick={handleLogout}>
             Logout
           </Button>
@@ -192,7 +227,7 @@ function Profile() {
                 <FaPills /> Medications
               </NavLink>
             </NavItem>
-	    <NavItem>
+            <NavItem>
               <NavLink
                 className={classnames({ active: activeTab === '6' })}
                 onClick={() => { toggle('6'); }}
@@ -228,7 +263,7 @@ function Profile() {
             <TabPane tabId="6">
               <SymptomTracker profile={profile} setProfile={setProfileAndUpdateFirestore} />
             </TabPane>
-	    <TabPane tabId="7">
+            <TabPane tabId="7">
               <FileUpload profile={profile} setProfile={setProfileAndUpdateFirestore} />
             </TabPane>
           </TabContent>
@@ -242,6 +277,7 @@ function Profile() {
         <FaRobot /> Chat Assistant
       </Button>
       <AIChat profile={profile} isOpen={isChatOpen} toggle={toggleChat} />
+      <FeedbackModal isOpen={isFeedbackModalOpen} toggle={toggleFeedbackModal} />
     </Container>
   );
 }
