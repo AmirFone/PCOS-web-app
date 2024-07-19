@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from 'react';
-import { Card, CardBody, CardTitle, Form, FormGroup, Label, Input, Button, Table } from 'reactstrap';
+import React, { useState } from 'react';
+import { Card, CardBody, CardTitle, Form, FormGroup, Label, Input, Button, Table, Row, Col, Badge, Alert } from 'reactstrap';
 import { doc, updateDoc, arrayUnion } from 'firebase/firestore';
 import { db } from '../../firebase';
 import { useAuth } from '../../context/AuthContext';
+import { FaCalendarAlt, FaExclamationTriangle } from 'react-icons/fa';
 
 const MenstrualCycleTracker = ({ profile, setProfile }) => {
   const [startDate, setStartDate] = useState('');
@@ -10,6 +11,8 @@ const MenstrualCycleTracker = ({ profile, setProfile }) => {
   const [symptoms, setSymptoms] = useState({
     cramps: false,
     moodSwings: false,
+    headache: false,
+    bloating: false,
     flowIntensity: 'medium'
   });
   const { currentUser } = useAuth();
@@ -30,21 +33,27 @@ const MenstrualCycleTracker = ({ profile, setProfile }) => {
 
     setProfile({
       ...profile,
-      menstrualCycles: [...(profile.menstrualCycles || []), newEntry]
+      menstrualCycles: [...(profile.menstrualCycles || []), newEntry].sort((a, b) => new Date(b.startDate) - new Date(a.startDate))
     });
 
+    resetForm();
+  };
+
+  const resetForm = () => {
     setStartDate('');
     setEndDate('');
     setSymptoms({
       cramps: false,
       moodSwings: false,
+      headache: false,
+      bloating: false,
       flowIntensity: 'medium'
     });
   };
 
   const predictNextCycle = () => {
     if (profile.menstrualCycles && profile.menstrualCycles.length > 0) {
-      const lastCycle = profile.menstrualCycles[profile.menstrualCycles.length - 1];
+      const lastCycle = profile.menstrualCycles[0];
       const lastStartDate = new Date(lastCycle.startDate);
       const predictedDate = new Date(lastStartDate.setDate(lastStartDate.getDate() + 28));
       return predictedDate.toISOString().split('T')[0];
@@ -54,60 +63,108 @@ const MenstrualCycleTracker = ({ profile, setProfile }) => {
 
   const isIrregular = () => {
     if (profile.menstrualCycles && profile.menstrualCycles.length > 1) {
-      const lastTwoCycles = profile.menstrualCycles.slice(-2);
-      const daysBetween = (new Date(lastTwoCycles[1].startDate) - new Date(lastTwoCycles[0].startDate)) / (1000 * 3600 * 24);
+      const lastTwoCycles = profile.menstrualCycles.slice(0, 2);
+      const daysBetween = (new Date(lastTwoCycles[0].startDate) - new Date(lastTwoCycles[1].startDate)) / (1000 * 3600 * 24);
       return Math.abs(daysBetween - 28) > 7;
     }
     return false;
   };
 
+  const getAverageCycleLength = () => {
+    if (profile.menstrualCycles && profile.menstrualCycles.length > 1) {
+      const cycleLengths = profile.menstrualCycles.slice(0, -1).map((cycle, index) => {
+        const nextCycle = profile.menstrualCycles[index + 1];
+        return (new Date(cycle.startDate) - new Date(nextCycle.startDate)) / (1000 * 3600 * 24);
+      });
+      const averageLength = cycleLengths.reduce((sum, length) => sum + length, 0) / cycleLengths.length;
+      return Math.round(averageLength);
+    }
+    return 'Not enough data';
+  };
+
   return (
-    <Card>
+    <Card className="mb-4">
       <CardBody>
         <CardTitle tag="h5">Menstrual Cycle Tracker</CardTitle>
         <Form onSubmit={handleSubmit}>
-          <FormGroup>
-            <Label for="startDate">Start Date</Label>
-            <Input
-              type="date"
-              name="startDate"
-              id="startDate"
-              value={startDate}
-              onChange={(e) => setStartDate(e.target.value)}
-              required
-            />
-          </FormGroup>
-          <FormGroup>
-            <Label for="endDate">End Date</Label>
-            <Input
-              type="date"
-              name="endDate"
-              id="endDate"
-              value={endDate}
-              onChange={(e) => setEndDate(e.target.value)}
-              required
-            />
-          </FormGroup>
-          <FormGroup check>
-            <Label check>
-              <Input
-                type="checkbox"
-                checked={symptoms.cramps}
-                onChange={(e) => setSymptoms({...symptoms, cramps: e.target.checked})}
-              />{' '}
-              Cramps
-            </Label>
-          </FormGroup>
-          <FormGroup check>
-            <Label check>
-              <Input
-                type="checkbox"
-                checked={symptoms.moodSwings}
-                onChange={(e) => setSymptoms({...symptoms, moodSwings: e.target.checked})}
-              />{' '}
-              Mood Swings
-            </Label>
-          </FormGroup>
+          <Row>
+            <Col md={6}>
+              <FormGroup>
+                <Label for="startDate">Start Date</Label>
+                <Input
+                  type="date"
+                  name="startDate"
+                  id="startDate"
+                  value={startDate}
+                  onChange={(e) => setStartDate(e.target.value)}
+                  required
+                />
+              </FormGroup>
+            </Col>
+            <Col md={6}>
+              <FormGroup>
+                <Label for="endDate">End Date</Label>
+                <Input
+                  type="date"
+                  name="endDate"
+                  id="endDate"
+                  value={endDate}
+                  onChange={(e) => setEndDate(e.target.value)}
+                  required
+                />
+              </FormGroup>
+            </Col>
+          </Row>
+          <Row className="mb-3">
+            <Col xs={6} sm={3}>
+              <FormGroup check>
+                <Label check>
+                  <Input
+                    type="checkbox"
+                    checked={symptoms.cramps}
+                    onChange={(e) => setSymptoms({...symptoms, cramps: e.target.checked})}
+                  />{' '}
+                  Cramps
+                </Label>
+              </FormGroup>
+            </Col>
+            <Col xs={6} sm={3}>
+              <FormGroup check>
+                <Label check>
+                  <Input
+                    type="checkbox"
+                    checked={symptoms.moodSwings}
+                    onChange={(e) => setSymptoms({...symptoms, moodSwings: e.target.checked})}
+                  />{' '}
+                  Mood Swings
+                </Label>
+              </FormGroup>
+            </Col>
+            <Col xs={6} sm={3}>
+              <FormGroup check>
+                <Label check>
+                  <Input
+                    type="checkbox"
+                    checked={symptoms.headache}
+                    onChange={(e) => setSymptoms({...symptoms, headache: e.target.checked})}
+                  />{' '}
+                  Headache
+                </Label>
+              </FormGroup>
+            </Col>
+            <Col xs={6} sm={3}>
+              <FormGroup check>
+                <Label check>
+                  <Input
+                    type="checkbox"
+                    checked={symptoms.bloating}
+                    onChange={(e) => setSymptoms({...symptoms, bloating: e.target.checked})}
+                  />{' '}
+                  Bloating
+                </Label>
+              </FormGroup>
+            </Col>
+          </Row>
           <FormGroup>
             <Label for="flowIntensity">Flow Intensity</Label>
             <Input
@@ -122,32 +179,43 @@ const MenstrualCycleTracker = ({ profile, setProfile }) => {
               <option value="heavy">Heavy</option>
             </Input>
           </FormGroup>
-          <Button color="primary" type="submit">Log Cycle</Button>
+          <Button color="primary" type="submit" block>Log Cycle</Button>
         </Form>
+        <Alert color="info" className="mt-4">
+          <FaCalendarAlt className="mr-2" /> Predicted Next Cycle: {predictNextCycle()}
+        </Alert>
+        {isIrregular() && (
+          <Alert color="warning" className="mt-2">
+            <FaExclamationTriangle className="mr-2" /> Your cycles appear to be irregular. Consider consulting your doctor.
+          </Alert>
+        )}
         <div className="mt-3">
-          <p>Predicted Next Cycle: {predictNextCycle()}</p>
-          {isIrregular() && (
-            <p className="text-danger">Your cycles appear to be irregular. Consider consulting your doctor.</p>
-          )}
+          <h6>Cycle Statistics:</h6>
+          <p>Average Cycle Length: {getAverageCycleLength()} days</p>
         </div>
-        <Table className="mt-3">
+        <Table responsive className="mt-4">
           <thead>
             <tr>
               <th>Start Date</th>
               <th>End Date</th>
+              <th>Duration</th>
               <th>Symptoms</th>
+              <th>Flow</th>
             </tr>
           </thead>
           <tbody>
-            {profile.menstrualCycles && profile.menstrualCycles.map((cycle, index) => (
+            {profile.menstrualCycles && profile.menstrualCycles.slice(0, 5).map((cycle, index) => (
               <tr key={index}>
                 <td>{new Date(cycle.startDate).toLocaleDateString()}</td>
                 <td>{new Date(cycle.endDate).toLocaleDateString()}</td>
+                <td>{Math.round((new Date(cycle.endDate) - new Date(cycle.startDate)) / (1000 * 3600 * 24))} days</td>
                 <td>
-                  {cycle.symptoms.cramps && 'Cramps '}
-                  {cycle.symptoms.moodSwings && 'Mood Swings '}
-                  {cycle.symptoms.flowIntensity}
+                  {cycle.symptoms.cramps && <Badge color="secondary" className="mr-1">Cramps</Badge>}
+                  {cycle.symptoms.moodSwings && <Badge color="secondary" className="mr-1">Mood Swings</Badge>}
+                  {cycle.symptoms.headache && <Badge color="secondary" className="mr-1">Headache</Badge>}
+                  {cycle.symptoms.bloating && <Badge color="secondary" className="mr-1">Bloating</Badge>}
                 </td>
+                <td><Badge color={cycle.symptoms.flowIntensity === 'heavy' ? 'danger' : cycle.symptoms.flowIntensity === 'medium' ? 'warning' : 'success'}>{cycle.symptoms.flowIntensity}</Badge></td>
               </tr>
             ))}
           </tbody>
